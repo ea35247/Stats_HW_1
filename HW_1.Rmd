@@ -1,0 +1,114 @@
+---
+title: "Q5"
+author: "Erin Anderson"
+date: "2026-09-19"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r import_csv, include=TRUE}
+library(readxl)
+
+### Import CSV file
+data1 <- read.csv("/Users/erinanderson/Desktop/R_Work/Stats_HW_1/BMI.csv")
+
+head(data1)
+```
+```{r create_scatterplot, include=TRUE}
+library(ggplot2)
+
+### Making the scatter plot and naming the x, y, and title
+
+p <- ggplot(data1, aes(x = Weight.kg., y = BMI)) + 
+  geom_point() +
+  labs(
+    x = "Weight (kg)",
+    y = "Body Mass Index (BMI)", 
+    title = "Weight (kg) by Body Mass Index (BMI)") +
+  theme_minimal()
+
+print(p)  
+``` 
+
+```{r calculating_linear_regression, include = TRUE}
+#### Hand-calculation of the model coefficients and regression equation
+#### using R as a calculator.
+
+### Calculate the mean of x and y
+mean_x <- mean(data1$Weight.kg.); mean_y <- mean(data1$BMI)
+print(cbind(mean_x,mean_y))
+
+### Calculate the variance and covariance of x and y
+var_x <- var(data1$Weight.kg.); var_y <- var(data1$BMI); cov_xy <- cov(data1$Weight.kg., data1$BMI)
+print(cbind(var_x, var_y, cov_xy))
+
+### Calculate the sum of squares (ss) of x,y, and covariance of xy
+n <- length(data1$BMI)
+SS_xx <- (n-1)*var_x
+SS_xy <- (n-1)*cov_xy
+SS_yy <- (n-1)*var_y
+print(cbind(SS_xx,SS_xy,SS_yy))
+
+
+### Calculate the model parameters including slope (b1), intercept (b0), regression line (yhat), and standard error (e)
+b1 <- SS_xy/SS_xx
+b0 <- mean_y - b1*mean_x
+yhat <- b0 + b1*(data1$Weight.kg.)
+e <- (data1$BMI)-yhat
+head(cbind(b0, b1))
+
+### Calculate sum of square errors (SSE), mean square error (MSE), and root MSE (s)
+SSE <- sum(e^2)
+MSE <- SSE/(n-2)
+s <- sqrt(MSE)
+
+print(cbind(SSE, MSE, s))
+```
+```{r regression_line, include = TRUE}
+library(ggplot2)
+
+### Adding the linear regression to the original scatter plot using the calculated slope (b1) and intercept (b0) from above 
+q <- ggplot(data1, aes(x = Weight.kg., y = BMI)) + 
+    geom_point() +
+    geom_abline(
+    intercept = b0,
+    slope = b1, 
+    linewidth = 1) +
+    labs(
+         x = "Weight (kg)",
+         y = "BMI", 
+         title = "Weight (kg) by BMI") +
+  theme_minimal()
+
+print(q)
+```
+
+```{r using_base_r, include = TRUE}
+### Doubling checking my method against base R (I am less familiar with base R)
+plot(data1$Weight.kg.,data1$BMI,xlim=c(40,180))
+abline(a=b0,b=b1)
+
+```
+
+```{r using_lm, include = TRUE}
+#Re-running the regression analysis except using lm() on the data
+lm1 <- lm(BMI ~ Weight.kg., data1)
+summary(lm1)
+
+# The slope (b1) and intercept (b0) of the model match what was hand calculated. The slope = 0.353 (kg/BMI units) and the intercept = 0.076 (BMI units). This equation is modeling the mean change in BMI for a person with a weight between 50kg and 160kg. In this example the intercept is not interpretable because it crosses the y axis at X = 0 (a person weighing 0kg). The data set does not include any provided data at that weight and so we cannot use the intercept to interpret the mean BMI of a 0kg person.
+
+#### Confidence Interval for the Slope
+confint(lm1, 'Weight.kg.', level=0.95)
+```
+
+```{r hypohtesis_test, include = TRUE}
+# H0: b1 = 0; Ha: b1 != 0.
+
+### T-test
+t_test <- b1/MSE
+t_test
+
+# Compare to t-test table at 253 df = 1.960 for a two tailed t-test with alpha = 0.05. The critical value is greater than the test statistic so we can reject the null. There is a significant mean change in BMI per kg.
+```
