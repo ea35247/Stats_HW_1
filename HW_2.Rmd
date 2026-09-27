@@ -1,0 +1,76 @@
+---
+title: "HW_2"
+author: "Erin Anderson"
+date: "2026-09-27"
+output: html_document
+---
+## Question 1
+
+1. The data for this problem is on the speed (X, in mph) and stopping distance (Y, in ft) of 50
+cars. What would be the power of an α=.05 test if the true slope of the regression line for
+this problem is 1.7? Assume σ{b1} = 0.5. Write a sentence explaining what this power
+means.
+
+```{r setup, include=TRUE}
+# delta = abs(beta1 - beta(10))/sigma(beta1)
+
+delta <- abs(1.7-0)/0.5
+delta
+
+# Check the table for alpha = 0.05, degrees of freedom = 48, and delta = 3.4
+# For delta = 3.0 and degrees of freedom = 40; power = 0.83
+# For delta = 4.0 and degrees of freedom = 5-; power = 0.84
+```
+
+## Question 2
+```{r setup, include=FALSE}
+library(readxl)
+
+### Import CSV file
+data1 <- read.csv("/Users/erinanderson/Desktop/R_Work/Stats_HW_1/BMI.csv")
+
+head(data1)
+```
+## a
+```{r 2-a, include=TRUE}
+# a) Calculate your confidence interval by hand. Show your work. (i.e., show your calculation for the point estimate, the standard error term, the t-value, and the steps in calculating the confidence interval.)
+
+#HW 1: b0, b1, SSxx, xbar, MSE.
+
+# b1 +/- SE(b1)*(1-alpha/2; n-2)
+
+#SE(b1)
+
+SE <- sqrt(SS_xx/(n-2))
+
+# H0: b1 = 0; Ha: b1 != 0.
+
+### T-test
+t_test <- b1/MSE
+t_test
+
+```
+
+## b
+```{r 2-b, include=TRUE}
+#For the BMI.csv data, construct a 90% confidence interval for mean BMI score when weight is 100kg.
+
+# b) Calculate your confidence interval, this time using the predict-function in R. Copy-paste your R commands, and the output showing the interval.
+
+### Regression model
+lm1 <- lm(BMI ~ Weight.kg., data1)
+
+#### Create a new data frame and set the value of X
+data1.new <- data.frame(Weight.kg.=100)
+
+#### Constructing a confidence interval for the mean response when X=100.
+#### Apply the predict function and set the interval type as "confidence"
+#### We will use a 0.90 confidence level (default=0.95).
+predict(lm1, newdata=data1.new, interval="confidence", level=0.90)
+```
+
+
+## c) Interpret your interval in the context of the problem.
+
+90% of the confidence intervals produced for a person with weight = 100kg capture beta1 and 10% do not. Therefore, we can be 90% confident that Ha is true
+
