@@ -1,0 +1,339 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Q5},
+  pdfauthor={Erin Anderson},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Q5}
+\author{Erin Anderson}
+\date{2026-09-19}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+
+\DocumentationTok{\#\#\# Import CSV file}
+\NormalTok{data1 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"/Users/erinanderson/Desktop/R\_Work/Stats\_HW\_1/BMI.csv"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(data1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   X Weight.kg.      BMI
+## 1 1        110 32.14025
+## 2 2        104 27.35043
+## 3 3        103 36.06316
+## 4 4         80 31.64432
+## 5 5        101 27.39800
+## 6 6        107 45.70892
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Making the scatter plot and naming the x, y, and title}
+
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(data1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Weight.kg., }\AttributeTok{y =}\NormalTok{ BMI)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Weight (kg)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Body Mass Index (BMI)"}\NormalTok{, }
+    \AttributeTok{title =} \StringTok{"Weight (kg) by Body Mass Index (BMI)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(p)  }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW_1_files/figure-latex/create_scatterplot-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# Hand{-}calculation of the model coefficients and regression equation}
+\DocumentationTok{\#\#\#\# using R as a calculator.}
+
+\DocumentationTok{\#\#\# Calculate the mean of x and y}
+\NormalTok{mean\_x }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{Weight.kg.); mean\_y }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{BMI)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(mean\_x,mean\_y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       mean_x  mean_y
+## [1,] 105.698 37.3941
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Calculate the variance and covariance of x and y}
+\NormalTok{var\_x }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{Weight.kg.); var\_y }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{BMI); cov\_xy }\OtherTok{\textless{}{-}} \FunctionTok{cov}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{Weight.kg., data1}\SpecialCharTok{$}\NormalTok{BMI)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(var\_x, var\_y, cov\_xy))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         var_x    var_y   cov_xy
+## [1,] 1086.495 192.4161 383.6014
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Calculate the sum of squares (ss) of x,y, and covariance of xy}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{BMI)}
+\NormalTok{SS\_xx }\OtherTok{\textless{}{-}}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{var\_x}
+\NormalTok{SS\_xy }\OtherTok{\textless{}{-}}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{cov\_xy}
+\NormalTok{SS\_yy }\OtherTok{\textless{}{-}}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{var\_y}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(SS\_xx,SS\_xy,SS\_yy))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         SS_xx    SS_xy   SS_yy
+## [1,] 275969.7 97434.75 48873.7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Calculate the model parameters including slope (b1), intercept (b0), regression line (yhat), and standard error (e)}
+\NormalTok{b1 }\OtherTok{\textless{}{-}}\NormalTok{ SS\_xy}\SpecialCharTok{/}\NormalTok{SS\_xx}
+\NormalTok{b0 }\OtherTok{\textless{}{-}}\NormalTok{ mean\_y }\SpecialCharTok{{-}}\NormalTok{ b1}\SpecialCharTok{*}\NormalTok{mean\_x}
+\NormalTok{yhat }\OtherTok{\textless{}{-}}\NormalTok{ b0 }\SpecialCharTok{+}\NormalTok{ b1}\SpecialCharTok{*}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{Weight.kg.)}
+\NormalTok{e }\OtherTok{\textless{}{-}}\NormalTok{ (data1}\SpecialCharTok{$}\NormalTok{BMI)}\SpecialCharTok{{-}}\NormalTok{yhat}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(b0, b1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              b0        b1
+## [1,] 0.07602281 0.3530631
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Calculate sum of square errors (SSE), mean square error (MSE), and root MSE (s)}
+\NormalTok{SSE }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(e}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{MSE }\OtherTok{\textless{}{-}}\NormalTok{ SSE}\SpecialCharTok{/}\NormalTok{(n}\DecValTok{{-}2}\NormalTok{)}
+\NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(MSE)}
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(SSE, MSE, s))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           SSE      MSE        s
+## [1,] 14473.08 57.20585 7.563455
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\DocumentationTok{\#\#\# Adding the linear regression to the original scatter plot using the calculated slope (b1) and intercept (b0) from above }
+\NormalTok{q }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(data1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Weight.kg., }\AttributeTok{y =}\NormalTok{ BMI)) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_abline}\NormalTok{(}
+    \AttributeTok{intercept =}\NormalTok{ b0,}
+    \AttributeTok{slope =}\NormalTok{ b1, }
+    \AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+         \AttributeTok{x =} \StringTok{"Weight (kg)"}\NormalTok{,}
+         \AttributeTok{y =} \StringTok{"BMI"}\NormalTok{, }
+         \AttributeTok{title =} \StringTok{"Weight (kg) by BMI"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(q)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW_1_files/figure-latex/regression_line-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Doubling checking my method against base R (I am less familiar with base R)}
+\FunctionTok{plot}\NormalTok{(data1}\SpecialCharTok{$}\NormalTok{Weight.kg.,data1}\SpecialCharTok{$}\NormalTok{BMI,}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{40}\NormalTok{,}\DecValTok{180}\NormalTok{))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\NormalTok{b0,}\AttributeTok{b=}\NormalTok{b1)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW_1_files/figure-latex/using_base_r-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Re{-}running the regression analysis except using lm() on the data}
+\NormalTok{lm1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(BMI }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Weight.kg., data1)}
+\FunctionTok{summary}\NormalTok{(lm1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = BMI ~ Weight.kg., data = data1)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.8241  -5.6286  -0.5016   4.6481  22.8666 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.07602    1.59380   0.048    0.962    
+## Weight.kg.   0.35306    0.01440  24.522   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.563 on 253 degrees of freedom
+## Multiple R-squared:  0.7039, Adjusted R-squared:  0.7027 
+## F-statistic: 601.3 on 1 and 253 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# The slope (b1) and intercept (b0) of the model match what was hand calculated. The slope = 0.353 (kg/BMI units) and the intercept = 0.076 (BMI units). This equation is modeling the mean change in BMI for a person with a weight between 50kg and 160kg. In this example the intercept is not interpretable because it crosses the y axis at X = 0 (a person weighing 0kg). The data set does not include any provided data at that weight and so we cannot use the intercept to interpret the mean BMI of a 0kg person.}
+
+\DocumentationTok{\#\#\#\# Confidence Interval for the Slope}
+\FunctionTok{confint}\NormalTok{(lm1, }\StringTok{\textquotesingle{}Weight.kg.\textquotesingle{}}\NormalTok{, }\AttributeTok{level=}\FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                2.5 %    97.5 %
+## Weight.kg. 0.3247088 0.3814175
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# H0: b1 = 0; Ha: b1 != 0.}
+
+\DocumentationTok{\#\#\# T{-}test}
+\NormalTok{t\_test }\OtherTok{\textless{}{-}}\NormalTok{ b1}\SpecialCharTok{/}\NormalTok{MSE}
+\NormalTok{t\_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.006171801
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare to t{-}test table at 253 df = 1.960 for a two tailed t{-}test with alpha = 0.05. The critical value is greater than the test statistic so we can reject the null. There is a significant mean change in BMI per kg.}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
