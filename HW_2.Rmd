@@ -38,9 +38,9 @@ head(data1)
 
 #HW 1: b0, b1, SSxx, xbar, MSE.
 
-# b1 +/- SE(b1)*(1-alpha/2; n-2)
+# y(hat) +/- var(y)*t(star)
 
-b1 = 0.353063137811099
+b1 = 0.3530631
 SS_xx = 275969.7
 n = 255
 MSE = 57.20585
@@ -58,21 +58,28 @@ y_hat
 
 numerator <- (100 - x_bar)^2
 numerator
-#denominator <- sum(xi - x_bar)^2
 
+denominator <- sum((data1$Weight.kg. - x_bar)^2)
+denominator
 
-#SE(b1)
-
-SE <- sqrt(SS_xx/(n-2))
-SE
+s <- numerator/denominator
+s <- (1/n) + s
+s <- MSE * s
+s <- sqrt(s)
 
 # H0: b1 = 0; Ha: b1 != 0.
 
-### T-test
-t_test <- b1/MSE
-t_test
+### T-test (using t-table): two-tailed t-test at alpha = 0.9 on 255 degrees of freedom: t = 1.645
 
-# b1 +/- SE(b1)*(1-alpha/2; n-2)
+t_star <- 1.645
+
+# y(hat) +/- var(y)*t(star)
+
+CI_top <- y_hat + (s*t_star)
+CI_top
+
+CI_bottom <- y_hat - (s*t_star)
+CI_bottom
 
 ```
 
