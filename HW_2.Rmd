@@ -295,6 +295,5 @@ p <- ggplot(pred_df, aes(x = Weight.kg., y = BMI)) +
   theme_minimal()
 
 p
-
 ```
 
