@@ -32,6 +32,8 @@ head(data1)
 ```
 ### a
 ```{r 2-a, include=TRUE}
+# For the BMI.csv data, construct a 90% confidence interval for mean BMI score when weight is 100kg.
+
 # a) Calculate your confidence interval by hand. Show your work. (i.e., show your calculation for the point estimate, the standard error term, the t-value, and the steps in calculating the confidence interval.)
 
 #HW 1: b0, b1, SSxx, xbar, MSE.
@@ -42,6 +44,20 @@ b1 = 0.353063137811099
 SS_xx = 275969.7
 n = 255
 MSE = 57.20585
+b0 = 0.07602281
+x_bar = 105.698 #mean_x
+
+# Point estimate when X(h) = 100kg
+# Y(hat) = b0 + b1*X(h)
+
+y_hat <- b0 + b1*100
+
+# Variance estimate
+# s^2 (y-hat) = MSE(1/n + ((X(h) - X(bar)))^2/(sum(X(i) - x(bar))))
+
+numerator <- (100 - x_bar)^2
+denominator <- sum(xi - x_bar)^2
+
 
 #SE(b1)
 
@@ -53,6 +69,8 @@ SE
 ### T-test
 t_test <- b1/MSE
 t_test
+
+# b1 +/- SE(b1)*(1-alpha/2; n-2)
 
 ```
 
@@ -79,3 +97,32 @@ predict(lm1, newdata=data1.new, interval="confidence", level=0.90)
 
 **90% of the confidence intervals produced for a person with weight = 100kg capture beta1 and 10% do not. Therefore, we can be 90% confident that Ha is true**
 
+## Question 3
+
+### a
+```{r 3-a, include=TRUE}
+# For the BMI.csv data, construct a 90% prediction interval for mean BMI score of a person having weight 100kg.
+
+#a) Calculate your prediction interval by hand. Show your work. (i.e., show your calculation for the point estimate, the standard error term, the t-value, and the steps in calculating the prediction interval.)
+
+```
+
+### b
+```{r 3-b, include=TRUE}
+# b) Calculate your prediction interval, this time using the predict-function in R. Copy-paste your R commands, and the output showing the interval.
+
+### Regression model
+lm1 <- lm(BMI ~ Weight.kg., data1)
+
+#### Create a new data frame and set the value of X
+data1.new <- data.frame(Weight.kg.=100)
+
+#### Constructing a prediction interval for the mean response when X=100.
+#### Apply the predict function and set the interval type as "predict"
+#### We will use a 0.90 confidence level (default=0.95).
+predict(lm1, newdata=data1.new, interval="predict", level=0.90)
+```
+
+### c
+
+**90% of the prediction intervals produced for a person with weight = 100kg capture beta1 and 10% do not**
