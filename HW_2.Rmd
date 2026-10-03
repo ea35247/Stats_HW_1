@@ -19,7 +19,7 @@ Check the table for alpha = 0.05, degrees of freedom = 48, and delta = 3.4
 
 **For delta = 3.0 and degrees of freedom = 40; power = 0.83**
 
-**For delta = 4.0 and degrees of freedom = 5-; power = 0.84**
+**For delta = 4.0 and degrees of freedom = 5; power = 0.84**
 
 # **Question 2**
 
@@ -80,6 +80,8 @@ CI_top
 
 CI_bottom <- y_hat - (s*t_star)
 CI_bottom
+
+cbind(CI_bottom, CI_top)
 
 ```
 
@@ -150,13 +152,15 @@ s_pred <- sqrt(s_pred)
 
 t_star <- 1.645
 
-# y(hat) +/- var(y)*t(star)
+# y(hat) +/- var(pred)*t(star)
 
 PI_top <- y_hat + (s_pred*t_star)
 PI_top
 
 PI_bottom <- y_hat - (s_pred*t_star)
 PI_bottom
+
+cbind(PI_bottom, PI_top)
 ```
 
 ### b
@@ -181,11 +185,59 @@ predict(lm1, newdata=data1.new, interval="predict", level=0.90)
 
 ## **Question 4**
 
+### # For the BMI.csv data, construct a 90% prediction interval for mean BMI score of three persons each of whose weight is 100kg
+
 ### a
 ```{r 4-a, include=TRUE}
-# For the BMI.csv data, construct a 90% prediction interval for mean BMI score of three persons each of whose weight is 100kg
-
 # a) Calculate your prediction interval by hand. Show your work. (i.e., show your calculation for the point estimate, the standard error term, the t-value, and the steps in calculating the prediction interval.)
+
+# y(hat) +/- var(mean_pred)
+
+b1 = 0.3530631
+n = 255
+MSE = 57.20585
+b0 = 0.07602281
+x_bar = 105.698 #mean_x
+
+# Point estimate when X(h) = 100kg
+# Y(hat) = b0 + b1*X(h)
+
+y_hat <- b0 + b1*100
+y_hat
+
+# Variance estimate
+# s^2 (predmean) = MSE/m + s^2(y-hat)
+
+# Var(y_hat)
+numerator <- (100 - x_bar)^2
+numerator
+
+denominator <- sum((data1$Weight.kg. - x_bar)^2)
+denominator
+
+s <- numerator/denominator
+s <- (1/n) + s
+s <- MSE * s
+
+# Not taking square root until the end
+# Var(predmean)
+
+s_predmean <- s + (MSE/3)
+s_predmean <- sqrt(s_predmean)
+
+### T-test (using t-table): two-tailed t-test at alpha = 0.9 on 255 degrees of freedom: t = 1.645
+
+t_star <- 1.645
+
+# y(hat) +/- var(predmean)*t(star)
+
+PI_top_m <- y_hat + (s_pred*t_star)
+PI_top_m
+
+PI_bottom_m <- y_hat - (s_pred*t_star)
+PI_bottom_m
+
+cbind(PI_bottom_m, PI_top_m)
 ```
 
 ### b
@@ -235,7 +287,14 @@ library(ggplot2)
 
 p <- ggplot(pred_df, aes(x = Weight.kg., y = BMI)) +
   geom_point() +
-  geom_ribbon(aes(ymin = lwr, ymax = upr)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), fill = "blue", alpha = 0.4) +
   geom_line(aes(y = fit)) +
+  labs(
+    x = "Weight (kg)",
+    y = "BMI") +
   theme_minimal()
+
+p
+
 ```
+
