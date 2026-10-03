@@ -111,6 +111,52 @@ predict(lm1, newdata=data1.new, interval="confidence", level=0.90)
 ```{r 3-a, include=TRUE}
 #a) Calculate your prediction interval by hand. Show your work. (i.e., show your calculation for the point estimate, the standard error term, the t-value, and the steps in calculating the prediction interval.)
 
+# y(hat) +/- var(pred)
+
+b1 = 0.3530631
+SS_xx = 275969.7
+n = 255
+MSE = 57.20585
+b0 = 0.07602281
+x_bar = 105.698 #mean_x
+
+# Point estimate when X(h) = 100kg
+# Y(hat) = b0 + b1*X(h)
+
+y_hat <- b0 + b1*100
+y_hat
+
+# Variance estimate
+# s^2 (pred) = MSE + s^2(y-hat)
+
+# Var(y_hat)
+numerator <- (100 - x_bar)^2
+numerator
+
+denominator <- sum((data1$Weight.kg. - x_bar)^2)
+denominator
+
+s <- numerator/denominator
+s <- (1/n) + s
+s <- MSE * s
+
+# Not taking square root until the end
+# Var(pred)
+
+s_pred <- s + MSE
+s_pred <- sqrt(s_pred)
+
+### T-test (using t-table): two-tailed t-test at alpha = 0.9 on 255 degrees of freedom: t = 1.645
+
+t_star <- 1.645
+
+# y(hat) +/- var(y)*t(star)
+
+PI_top <- y_hat + (s_pred*t_star)
+PI_top
+
+PI_bottom <- y_hat - (s_pred*t_star)
+PI_bottom
 ```
 
 ### b
