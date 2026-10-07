@@ -231,10 +231,10 @@ t_star <- 1.645
 
 # y(hat) +/- var(predmean)*t(star)
 
-PI_top_m <- y_hat + (s_pred*t_star)
+PI_top_m <- y_hat + (s_predmean*t_star)
 PI_top_m
 
-PI_bottom_m <- y_hat - (s_pred*t_star)
+PI_bottom_m <- y_hat - (s_predmean*t_star)
 PI_bottom_m
 
 cbind(PI_bottom_m, PI_top_m)
