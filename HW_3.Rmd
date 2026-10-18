@@ -25,7 +25,7 @@ summary(lm1)
 # SSTO = summation((y(i) - y(hat))^2)
 b1 = 14.7383
 b0 = -2.3221
-yhat <- b0 + b1*(data1$minutes)
+yhat <- b0 + b1*(data1$machines)
 e <- (data1$minutes)-yhat
 yi <- b0 + (b1*(data1$machines)) + e
 cbind(e, yi)
@@ -43,11 +43,70 @@ SSR <- sum(SSR)
 SSR
 ```
 ## d) (3 pts) Using R as a calculator, obtain SSE. You can use the fitted values from the regression in (a).
+```{r d, include=TRUE}
+# SSE = sum((yi - yhat)^2)
+SSE <- (yi - yhat)^2
+SSE <- sum(SSE)
+SSE
+```
 ## e) (6 pts) Using the pieces above, manually construct the complete ANOVA table for the regression analysis, with columns for Source of variation, SS, df, and MS.
+```{r e, include=TRUE}
+n <- length(data1$minutes)
+MSE <- SSE/(n-2)
+MSE
+MSR <- SSR/1
+MSR
+EMSE <- var(data1$minutes)
+EMSE
+EMSR <- (data1$machines - mean(data1$machines))^2
+EMSR <- sum(EMSR)
+EMSR <- (b1^2)*EMSR
+EMSR <- var(data1$machines) + EMSR
+EMSR
+```
 ## f) (2 pts) Obtain the same ANOVA table using R.
+```{r f, include=TRUE}
+anova_model <- aov(minutes ~ machines, data = data1)
+summary(anova_model)
+```
 ## g) (4 pts) Conduct an F test to determine whether or not there is a linear association between time spent and number of machines serviced. Use alpha=0.10. State the null and alternate hypotheses, write your test statistic, rejection region, and p-value. Make a decision, and write your conclusion.
+```{r g, include=TRUE}
+F <- MSR/MSE
+```
 ## h) (2 pts) By what proportion is the total variation in number of minutes spent on a call reduced when the number of machines serviced is introduced as a predictor into the analysis? What is the name of this measure?
+```{r h, include=TRUE}
+
+```
 ## i) (5 pts) In R, plot the deviations (Yi – Yi(hat)) against Xi on a graph. Plot the deviations (Yi(hat) – Ybar) against Xi on another graph, using the same scales as for the first graph. From your two graphs, does SSE or SSR appear to be the larger component of SSTO?
+```{r i, include=TRUE}
+# Deviations
+SSR_dev <- (yhat - ybar)
+SSE_dev <- (yi - yhat)
+
+# Common y-axis scale for both plots
+ylim_common <- range(c(SSE_dev,SSR_dev))
+
+# Plot deviations associated with SSE
+plot(data1$machines, SSE_dev,
+     xlab = "Machines",
+     ylab = "Deviations on SSE",
+     main = "Residual Deviations",
+     ylim = ylim_common,
+     pch = 19)
+
+abline(h = 0, lty = 2)
+
+
+# Plot deviations associated with SSR
+plot(data1$machines, SSR_dev,
+     xlab = "Machines",
+     ylab = "Deviations on SSR",
+     main = "Regression Deviations",
+     ylim = ylim_common,
+     pch = 19)
+
+abline(h = 0, lty = 2)
+```
 ## j) (2 pts) What does this (the SSE vs SSR comparison in part (i)) imply about the magnitude of R2? Explain.
 ## k) (6 pts) Use R to obtain the correlation between the response and predictor variables. Write the steps of a correlation test to see if there is a significant linear association. Using the correlation, calculate your test statistic by hand and find the P-value of the test. Make a decision and write your conclusion.
 ## l) (2 pts) Find the standard deviation of the predictor variable (SX), and the standard deviation of the response variable (SY). Using these quantities, and the correlation, calculate the slope, and confirm that it is the same as you obtained earlier.
