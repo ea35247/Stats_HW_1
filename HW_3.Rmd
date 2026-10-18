@@ -1,0 +1,53 @@
+---
+title: "HW_3"
+author: "Erin Anderson"
+date: "2026-10-18"
+output: html_document
+---
+
+```{r import, include=TRUE}
+library(readxl)
+
+### Import CSV file
+data1 <- read.csv("/Users/erinanderson/Desktop/R_Work/Stats_HW_1/machine.csv")
+
+head(data1)
+```
+
+## a) (2 pts) Use the lm( ) function in R to obtain the estimated regression function.
+```{r a, include=TRUE}
+lm1 <- lm(minutes ~ machines, data1)
+summary(lm1)
+```
+
+## b) (3 pts) Using R as a calculator, obtain SSTO.
+```{r b, include=TRUE}
+# SSTO = summation((y(i) - y(hat))^2)
+b1 = 14.7383
+b0 = -2.3221
+yhat <- b0 + b1*(data1$minutes)
+e <- (data1$minutes)-yhat
+yi <- b0 + (b1*(data1$machines)) + e
+cbind(e, yi)
+SSTO <- (yi - yhat)^2
+SSTO <- sum(SSTO)
+SSTO
+```
+
+## c) (3 pts) Using R as a calculator, obtain SSR. You can use the fitted values from the regression in (a).
+```{r c, include=TRUE}
+# SSR = sum((yhat - ybar)^2)
+ybar <- mean(data1$minutes)
+SSR <- (yhat - ybar)^2
+SSR <- sum(SSR)
+SSR
+```
+## d) (3 pts) Using R as a calculator, obtain SSE. You can use the fitted values from the regression in (a).
+## e) (6 pts) Using the pieces above, manually construct the complete ANOVA table for the regression analysis, with columns for Source of variation, SS, df, and MS.
+## f) (2 pts) Obtain the same ANOVA table using R.
+## g) (4 pts) Conduct an F test to determine whether or not there is a linear association between time spent and number of machines serviced. Use alpha=0.10. State the null and alternate hypotheses, write your test statistic, rejection region, and p-value. Make a decision, and write your conclusion.
+## h) (2 pts) By what proportion is the total variation in number of minutes spent on a call reduced when the number of machines serviced is introduced as a predictor into the analysis? What is the name of this measure?
+## i) (5 pts) In R, plot the deviations (Yi – Yi(hat)) against Xi on a graph. Plot the deviations (Yi(hat) – Ybar) against Xi on another graph, using the same scales as for the first graph. From your two graphs, does SSE or SSR appear to be the larger component of SSTO?
+## j) (2 pts) What does this (the SSE vs SSR comparison in part (i)) imply about the magnitude of R2? Explain.
+## k) (6 pts) Use R to obtain the correlation between the response and predictor variables. Write the steps of a correlation test to see if there is a significant linear association. Using the correlation, calculate your test statistic by hand and find the P-value of the test. Make a decision and write your conclusion.
+## l) (2 pts) Find the standard deviation of the predictor variable (SX), and the standard deviation of the response variable (SY). Using these quantities, and the correlation, calculate the slope, and confirm that it is the same as you obtained earlier.
