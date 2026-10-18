@@ -3,8 +3,9 @@ title: "HW_2"
 author: "Erin Anderson"
 date: "2026-09-27"
 output:
-  pdf_document: default
+  word_document: default
   html_document: default
+  pdf_document: default
 ---
 ## **Question 1**
 
@@ -293,10 +294,21 @@ p <- ggplot(pred_df, aes(x = Weight.kg., y = BMI)) +
   geom_line(aes(y = fit)) +
   labs(
     x = "Weight (kg)",
-    y = "BMI") +
+    y = "BMI", 
+    title = "BMI vs. Weight") +
   theme_minimal()
 
 p
+
+print(p)
+ggsave("hw_2.png",
+  p,
+  width = 8,
+  height = 8,   # <-- key: more height for 3 rows
+  dpi = 300,
+  bg = "white"
+)
+browseURL("hw_2.png")
 ```
 
 
