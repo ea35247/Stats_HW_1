@@ -26,10 +26,11 @@ summary(lm1)
 b1 = 14.7383
 b0 = -2.3221
 yhat <- b0 + b1*(data1$machines)
+ybar <- mean(data1$minutes)
 e <- (data1$minutes)-yhat
 yi <- b0 + (b1*(data1$machines)) + e
 cbind(e, yi)
-SSTO <- (yi - yhat)^2
+SSTO <- (yi - ybar)^2
 SSTO <- sum(SSTO)
 SSTO
 ```
@@ -37,7 +38,6 @@ SSTO
 ## c) (3 pts) Using R as a calculator, obtain SSR. You can use the fitted values from the regression in (a).
 ```{r c, include=TRUE}
 # SSR = sum((yhat - ybar)^2)
-ybar <- mean(data1$minutes)
 SSR <- (yhat - ybar)^2
 SSR <- sum(SSR)
 SSR
@@ -72,12 +72,17 @@ summary(anova_model)
 ## g) (4 pts) Conduct an F test to determine whether or not there is a linear association between time spent and number of machines serviced. Use alpha=0.10. State the null and alternate hypotheses, write your test statistic, rejection region, and p-value. Make a decision, and write your conclusion.
 ```{r g, include=TRUE}
 F <- MSR/MSE
-
-#Checking the F table for an F test at alpha = 0.05 on 16 degrees of freedom gives an F value of 4.49. F* = 805.6 which is greater than the F value allowing us to reject the null hypothesis and accept the alternate hypothesis that there is a linear relationship between number of machines and minutes serviced.
+F
+#Checking the F table for an F test at alpha = 0.05 with 1 degree of freedom in the numerator and 16 degrees of freedom in the denominator gives an F value of 4.49. F* = 805.6 which is greater than the F value allowing us to reject the null hypothesis (H0: beta1 = 0) and accept the alternate hypothesis (Ha: beta1 != 0) that there is a linear relationship between number of minutes spent on a call and number of machines serviced.
 ```
 ## h) (2 pts) By what proportion is the total variation in number of minutes spent on a call reduced when the number of machines serviced is introduced as a predictor into the analysis? What is the name of this measure?
 ```{r h, include=TRUE}
+# R^2 is the coefficient of determination which explains the proportion of the total variation of the number of minutes spent on call when number of machines serviced is added as a predictor variable.
 
+R_sqr <- SSR/SSTO
+R_sqr
+
+#The total variance explained is 98.05% when number of machines serviced is added as a predictor variable, making the unexplained variance (SSE/SSTO) 1.95%. Adding number of machines serviced in the regression model reduces the unexplained variation in minutes spent on a call by 98.05% 
 ```
 ## i) (5 pts) In R, plot the deviations (Yi – Yi(hat)) against Xi on a graph. Plot the deviations (Yi(hat) – Ybar) against Xi on another graph, using the same scales as for the first graph. From your two graphs, does SSE or SSR appear to be the larger component of SSTO?
 ```{r i, include=TRUE}
