@@ -2,7 +2,9 @@
 title: "HW_3"
 author: "Erin Anderson"
 date: "2026-10-18"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r import, include=TRUE}
@@ -146,6 +148,31 @@ p_value
 # The calculated t value of 28.39 is greater than the critical value of 1.337 and the p value is less than 0.05 (p = 4.087e-15) allowing us to reject the null (H0: rho = 0) and accept the alternate (Ha: rho != 0) and determine that there is a statistically significant linear correlation between the number of machines serviced and the number of  minutes spent on a call.
 ```
 ## l) (2 pts) Find the standard deviation of the predictor variable (SX), and the standard deviation of the response variable (SY). Using these quantities, and the correlation, calculate the slope, and confirm that it is the same as you obtained earlier.
-```{r k, include=TRUE}
+```{r l, include=TRUE}
+# Sx = sqrt((sum(x - xbar)^2)/n-1)
+xbar <- mean(data1$machines)
+Sx <- data1$machines - xbar
+Sx <- Sx^2
+Sx <- sum(Sx)
+Sx <- Sx/(n-1)
+Sx <- sqrt(Sx)
+Sx
 
+# Sy = sqrt((sum(y - ybar)^2)/n-1)
+Sy <- data1$minutes - ybar
+Sy <- Sy^2
+Sy <- sum(Sy)
+Sy <- Sy/(n-1)
+Sy <- sqrt(Sy)
+Sy
+
+# b1*Sx = r*Sy
+#b1 = r*Sy/Sx
+
+b1 <- r*Sy
+b1 <- b1/Sx
+b1
+
+#Check against regression line
+summary(lm1)
 ```
