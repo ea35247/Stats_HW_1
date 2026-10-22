@@ -72,6 +72,8 @@ summary(anova_model)
 ## g) (4 pts) Conduct an F test to determine whether or not there is a linear association between time spent and number of machines serviced. Use alpha=0.10. State the null and alternate hypotheses, write your test statistic, rejection region, and p-value. Make a decision, and write your conclusion.
 ```{r g, include=TRUE}
 F <- MSR/MSE
+
+#Checking the F table for an F test at alpha = 0.05 on 16 degrees of freedom gives an F value of 4.49. F* = 805.6 which is greater than the F value allowing us to reject the null hypothesis and accept the alternate hypothesis that there is a linear relationship between number of machines and minutes serviced.
 ```
 ## h) (2 pts) By what proportion is the total variation in number of minutes spent on a call reduced when the number of machines serviced is introduced as a predictor into the analysis? What is the name of this measure?
 ```{r h, include=TRUE}
