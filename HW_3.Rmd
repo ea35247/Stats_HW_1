@@ -73,7 +73,7 @@ summary(anova_model)
 ```{r g, include=TRUE}
 F <- MSR/MSE
 F
-#Checking the F table for an F test at alpha = 0.05 with 1 degree of freedom in the numerator and 16 degrees of freedom in the denominator gives an F value of 4.49. F* = 805.6 which is greater than the F value allowing us to reject the null hypothesis (H0: beta1 = 0) and accept the alternate hypothesis (Ha: beta1 != 0) that there is a linear relationship between number of minutes spent on a call and number of machines serviced.
+#Checking the F table for an F test at alpha = 0.10 with 1 degree of freedom in the numerator and 16 degrees of freedom in the denominator gives a critical F value of 3.29. F* = 805.6 which is greater than the F value allowing us to reject the null hypothesis (H0: beta1 = 0) and accept the alternate hypothesis (Ha: beta1 != 0) that there is a linear relationship between number of minutes spent on a call and number of machines serviced.
 ```
 ## h) (2 pts) By what proportion is the total variation in number of minutes spent on a call reduced when the number of machines serviced is introduced as a predictor into the analysis? What is the name of this measure?
 ```{r h, include=TRUE}
@@ -113,7 +113,39 @@ plot(data1$machines, SSR_dev,
      pch = 19)
 
 abline(h = 0, lty = 2)
+
+# SSR appears to be the larger proportion of the deviations on SSTO. 
 ```
 ## j) (2 pts) What does this (the SSE vs SSR comparison in part (i)) imply about the magnitude of R2? Explain.
+```{r j, include=TRUE}
+# Since SSR is much larger than SSE, R^2 is expected to close to 1 (R^2 = SSR/SSTO). A much larger SSR compared to SSE indicates that introducing the number of machines as a predictor explains a large proportion of the total variation in number of minutes spent on a call, leaving very little unexplained variation.
+```
 ## k) (6 pts) Use R to obtain the correlation between the response and predictor variables. Write the steps of a correlation test to see if there is a significant linear association. Using the correlation, calculate your test statistic by hand and find the P-value of the test. Make a decision and write your conclusion.
+```{r k, include=TRUE}
+# r tells us the correlation and standard version of the slope of the linear regression
+r <- sqrt(R_sqr)
+r
+
+# The coefficient of correlation (r) is 0.99 indicating a very strong linear correlation between the number of machines serviced and the number minutes spent on a call.
+
+# t = r/sqrt((1-r^2)/n-2)
+t <- r^2
+t <- 1 - t
+t <- t/(n-2)
+t <- sqrt(t)
+t <- r/t
+t
+
+# Checking the t table for the t statistic at alpha = 0.1 on 16 degrees of freedom provides a critical t value of 1.337.The calculated t value (28.39) is much largr than the t statistic (1.337). 
+
+# Calculate two-tailed P-value
+p_value <- 2 * pt(-abs(t), df = n - 2)
+
+p_value
+
+# The calculated t value of 28.39 is greater than the critical value of 1.337 and the p value is less than 0.05 (p = 4.087e-15) allowing us to reject the null (H0: rho = 0) and accept the alternate (Ha: rho != 0) and determine that there is a statistically significant linear correlation between the number of machines serviced and the number of  minutes spent on a call.
+```
 ## l) (2 pts) Find the standard deviation of the predictor variable (SX), and the standard deviation of the response variable (SY). Using these quantities, and the correlation, calculate the slope, and confirm that it is the same as you obtained earlier.
+```{r k, include=TRUE}
+
+```
